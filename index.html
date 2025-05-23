@@ -14,9 +14,8 @@
     <button onclick="DragonBallButton()">Generálás</button>
 
     <div class="container-fluid">
-        <div class="row" id="fodiv">
-
-        </div>
+        <div class="row" id="elsodiv"></div>
+        <div class="row" id="masodikdiv"></div>
     </div>
 
     <script>
@@ -27,6 +26,24 @@
         const response = await fetch("https://dragonball-api.com/api/characters?limit=8");
 
         const data = await response.json();
+
+        for (let i = 0; i <8; i++) {
+                const imgURL = data[i].url;
+                const imgCard = 
+                `
+                    <div class="col-lg-3 col-md-3">
+                        <div class="card">
+                            <img class="card-img img-fluid w-75" src="${imgURL}"/>
+                        </div>
+                    </div>
+                `;
+
+                if (i < 4) {
+                    document.querySelector("#elsodiv").innerHTML += imgCard;
+                } else {
+                    document.querySelector("#masodikdiv").innerHTML += imgCard;
+                }
+            }
     </script>
 </body>
 </html>
