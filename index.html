@@ -13,7 +13,11 @@
 <body>
     <h1>Dragon Ball karakterek</h1>
 
-    <button onclick="DragonBallButton()">Generálás</button>
+    <div class="container">
+        <button onclick="DragonBallButton()">Generálás</button>
+        <button onclick="Saiyan()">Saiyan származás</button>
+        <button onclick="KI()">Ki > 50.000</button>
+    </div>
 
     <div class="container-fluid">
         <div class="row" id="elsodiv"></div>
@@ -38,9 +42,9 @@
                 const description = data.items[i].description;
                 const affiliation = data.items[i].affiliation;
                 const deletedAt = data.items[i].deletedAt;
-                
+
                 const card =
-                `
+                    `
                     <div class="col-lg-6 col-md-6">
                         <div class=" card card_img_div">
                             <img class="card-img img-fluid" src="${img}"/>
@@ -63,12 +67,62 @@
 
                 if (i < 2) {
                     document.querySelector("#elsodiv").innerHTML += card;
-                } else if (4 > i > 2)  {
+                } else if (4 > i > 2) {
                     document.querySelector("#masodikdiv").innerHTML += card;
-                } else if (6 > i > 4)  {
+                } else if (6 > i > 4) {
                     document.querySelector("#harmadikdiv").innerHTML += card;
                 } else {
-                    document.querySelector("#negyedikdiv").innerHTML += card;   
+                    document.querySelector("#negyedikdiv").innerHTML += card;
+                }
+            }
+        }
+
+        async function Saiyan() {
+            const response = await fetch("https://dragonball-api.com/api/characters?race=Saiyan");
+            const data = await response.json();
+
+            for (let i = 0; i < data.length; i++) {
+                const img = data[i].image;
+                const id = data[i].id;
+                const name = data[i].name;
+                const ki = data[i].ki;
+                const maxKi = data[i].maxKi;
+                const race = data[i].race;
+                const gender = data[i].gender;
+                const description = data[i].description;
+                const affiliation = data[i].affiliation;
+                const deletedAt = data[i].deletedAt;
+
+                const card =
+                    `
+                    <div class="col-lg-6 col-md-6">
+                        <div class=" card card_img_div">
+                            <img class="card-img img-fluid" src="${img}"/>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="card card_description_div">
+                            <p>Id: ${id}</p>
+                            <p>Name: ${name}</p>
+                            <p>Ki: ${ki}</p>
+                            <p>MaxKi: ${maxKi}</p>
+                            <p>Race: ${race}</p>
+                            <p>Gender: ${gender}</p>
+                            <p id="">Description: ${description}</p>
+                            <p>Affiliation: ${affiliation}</p>
+                        </div>
+                    </div>
+                `;
+
+                if (i < 2) {
+                    document.querySelector("#elsodiv").innerHTML += card;
+                } else if (4 > i > 2) {
+                    document.querySelector("#masodikdiv").innerHTML += card;
+                } else if (6 > i > 4) {
+                    document.querySelector("#harmadikdiv").innerHTML += card;
+                } else {
+                    document.querySelector("#negyedikdiv").innerHTML += card;
                 }
             }
         }
