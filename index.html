@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Dragon Ball API</title>
 </head>
+
 <body>
     <h1>Dragon Ball karakterek</h1>
 
@@ -20,17 +22,14 @@
 
     <script>
         async function DragonBallButton() {
-            document.querySelector("#fodiv").innerHTML = '';
-        }
+            const response = await fetch("https://dragonball-api.com/api/characters?limit=8");
 
-        const response = await fetch("https://dragonball-api.com/api/characters?limit=8");
+            const data = await response.json();
 
-        const data = await response.json();
-
-        for (let i = 0; i <8; i++) {
+            for (let i = 0; i < 8; i++) {
                 const imgURL = data[i].url;
-                const imgCard = 
-                `
+                const imgCard =
+                    `
                     <div class="col-lg-3 col-md-3">
                         <div class="card">
                             <img class="card-img img-fluid w-75" src="${imgURL}"/>
@@ -44,6 +43,8 @@
                     document.querySelector("#masodikdiv").innerHTML += imgCard;
                 }
             }
+        }
     </script>
 </body>
+
 </html>
